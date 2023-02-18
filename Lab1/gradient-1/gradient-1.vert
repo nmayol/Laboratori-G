@@ -26,9 +26,9 @@ void main()
     vec3 col1,col2;
     float ipol = 4*(vertex.y-boundingBoxMin.y)/(boundingBoxMax.y-boundingBoxMin.y);
 
-    if (ipol <= 1) {col1 = red; col2 = yellow;}
-    else if (ipol <= 2) {col1 = yellow; col2 = green;}
-    else if (ipol <= 3) {col1 = green; col2 = cyan;}
+    if (ipol < 1) {col1 = red; col2 = yellow;}
+    else if (ipol < 2) {col1 = yellow; col2 = green;}
+    else if (ipol < 3) {col1 = green; col2 = cyan;}
     else {col1 = cyan; col2 = blue;}
     
     frontColor = vec4(mix(col1,col2,fract(ipol)),1.0);
