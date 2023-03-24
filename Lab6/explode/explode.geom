@@ -11,7 +11,7 @@ uniform mat3 normalMatrix;
 uniform mat4 modelViewProjectionMatrix;
 uniform float time;
 
-const float speed = 1.2;
+const float speed = 0.5;
 
 
 void main( void )
@@ -22,7 +22,8 @@ void main( void )
 	{
 		
 		gfrontColor = vfrontColor[i];
-		gl_Position = modelViewProjectionMatrix*(gl_in[i].gl_Position + trans[i]);
+		mat4 TG = mat4(vec4(1,0,0,0), vec4(0,1,0,0),vec4(0,0,1,0),vec4(trans,1.));
+		gl_Position = modelViewProjectionMatrix*(TG*gl_in[i].gl_Position);
 		EmitVertex();
 	}
     EndPrimitive();
