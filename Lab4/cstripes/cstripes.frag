@@ -10,6 +10,7 @@ uniform vec2 origin = vec2(0,0);
 void main()
 {
 
+    
     float dist = distance(vtexCoord,origin);
     float i = nstripes * dist;
     vec4 col;

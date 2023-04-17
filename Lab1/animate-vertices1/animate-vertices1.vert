@@ -18,7 +18,7 @@ const float PI = 3.141592;
 void main()
 {
     vec3 N = normalize(normalMatrix * normal);
-    frontColor = vec4(N.z,N.z,N.z,1.0)  ;
+    frontColor = vec4(N.z,N.z,N.z,1.0);
     vtexCoord = texCoord;
     
     gl_Position = modelViewProjectionMatrix * vec4(vertex+normal*amplitude*sin(2*PI*freq*time), 1.0);
