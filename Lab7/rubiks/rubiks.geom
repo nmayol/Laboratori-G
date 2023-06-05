@@ -17,7 +17,7 @@ uniform float time;
 
 
 
-void process(vec3 v,vec3 n) {
+void process(vec3 v,vec2 tex) {
 	if (gl_PrimitiveIDIn < 4) {
 		mat3 TG = mat3(	vec3( cos(time),sin(time),0),
 					vec3(-sin(time),cos(time),0),
@@ -27,12 +27,7 @@ void process(vec3 v,vec3 n) {
 	}
 	else gl_Position = modelViewProjectionMatrix * vec4(v,1.);
 	
-	if (n == vec3(1,0,0)) gtexCoord=vec2((v.z+2)/4.,(v.y+2)/4.); 
-	else if (n == vec3(0,1,0)) gtexCoord= vec2((v.x+2)/4.,(v.z+2)/4.);
-	else if (n == vec3(0,-1,0)) gtexCoord= vec2((v.x+2)/4.,(v.z+2)/4.);
-	else if (n == vec3(0,0,1)) gtexCoord= vec2((v.x+2)/4.,(v.y+2)/4.);
-	else if (n == vec3(0,0,-1)) gtexCoord= vec2((v.x+2)/4.,(v.y+2)/4.);
-	else if (n == vec3(-1,0,0)) gtexCoord=vec2((v.z+2)/4.,(v.y+2)/4.); 
+	gtexCoord = tex;
 	
 	
 	
@@ -61,14 +56,14 @@ void pintaCara(vec3 gNorm) {
 }
 
 void createSquare(vec3 v1, vec3 v2, vec3 v3, vec3 v4, vec3 n) {
-	process(v1,n);
-	process(v2,n);
-	process(v3,n);
-	process(v4,n);
-
-	// gNorm ha de tinr el mateix nom que la variable out, i entra al frag shader
 	gNorm = n;
 	pintaCara(gNorm);
+	process(v1,vec2(0,1));
+	process(v2,vec2(1,1));
+	process(v3,vec2(0,0));
+	process(v4,vec2(1,0));
+
+	// gNorm ha de tinr el mateix nom que la variable out, i entra al frag shader
 	EndPrimitive();
 	
 }
